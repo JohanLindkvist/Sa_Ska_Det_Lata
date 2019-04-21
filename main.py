@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import filedialog
 import random
 
 # Main Window
@@ -11,6 +12,7 @@ root.geometry(screen)
 root.config(bg = 'steel blue')
 root.title("Så Ska Det Låta!")
 root.option_add('*Dialog.msg.font', 'Helvetica 24')
+root.filename = filedialog.askopenfilename(title = "Select file")
 
 def t1_plus():
     temp = points_1.get('1.0','end')
@@ -144,7 +146,7 @@ def correct():
     new_song()
 
 #Input file
-file  = open('songs.csv', 'r')
+file  = open(root.filename, 'r')
 song_list = []
 for line in file:
     song = line.split(';')
