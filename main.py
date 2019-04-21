@@ -16,83 +16,83 @@ def t1_plus():
     temp = points_1.get('1.0','end')
     points_1.delete('1.0', 'end')
     points_1.insert('end',str(int(temp) + 1), 'tc')
-    
+
 def t1_minus():
     temp = points_1.get('1.0','end')
     points_1.delete('1.0', 'end')
     points_1.insert('end',str(int(temp) - 1), 'tc')
-    
+
 def t2_plus():
     temp = points_2.get('1.0','end')
     points_2.delete('1.0', 'end')
     points_2.insert('end',str(int(temp) + 1), 'tc')
-    
+
 def t2_minus():
     temp = points_2.get('1.0','end')
     points_2.delete('1.0', 'end')
     points_2.insert('end',str(int(temp) - 1), 'tc')
-    
-    
+
+
 # Toggle box function 1
 def tg_1():
     nbr = 1
-    green = random.randint(0,2)
-    if green:
-        bt_1.config(bg = 'green')
-    else:
-        bt_1.config(bg = 'red')
     index = int(lbl_index.cget('text'))
+    red = red_square[index][nbr-1]
+    if red:
+        bt_1.config(bg = 'red')
+    else:
+        bt_1.config(bg = 'green')
     song = song_list[index]
     bt_1.config(text = song[nbr-1])
 
 # Toggle box function 2
 def tg_2():
     nbr = 2
-    green = random.randint(0,2)
-    if green:
-        bt_2.config(bg = 'green')
-    else:
-        bt_2.config(bg = 'red')
     index = int(lbl_index.cget('text'))
+    red = red_square[index][nbr-1]
+    if red:
+        bt_2.config(bg = 'red')
+    else:
+        bt_2.config(bg = 'green')
     song = song_list[index]
     bt_2.config(text = song[nbr-1])
 
 # Toggle box function 3
 def tg_3():
     nbr = 3
-    green = random.randint(0,2)
-    if green:
-        bt_3.config(bg = 'green')
-    else:
-        bt_3.config(bg = 'red')
     index = int(lbl_index.cget('text'))
+    red = red_square[index][nbr-1]
+    if red:
+        bt_3.config(bg = 'red')
+    else:
+        bt_3.config(bg = 'green')
     song = song_list[index]
     bt_3.config(text = song[nbr-1])
 
 # Toggle box function 4
 def tg_4():
     nbr = 4
-    green = random.randint(0,2)
-    if green:
-        bt_4.config(bg = 'green')
-    else:
-        bt_4.config(bg = 'red')
     index = int(lbl_index.cget('text'))
+    red = red_square[index][nbr-1]
+    if red:
+        bt_4.config(bg = 'red')
+    else:
+        bt_4.config(bg = 'green')
     song = song_list[index]
     bt_4.config(text = song[nbr-1])
 
 # Toggle box function 5
 def tg_5():
     nbr = 5
-    green = random.randint(0,2)
-    if green:
-        bt_5.config(bg = 'green')
-    else:
-        bt_5.config(bg = 'red')
     index = int(lbl_index.cget('text'))
+    red = red_square[index][nbr-1]
+    if red:
+        bt_5.config(bg = 'red')
+    else:
+        bt_5.config(bg = 'green')
     song = song_list[index]
-    bt_5.config(text = song[nbr-1])          
-    
+    bt_5.config(text = song[nbr-1])
+
 # Next song button command
 def new_song():
     bt_1.config(bg = 'blue', text = '1')
@@ -120,23 +120,20 @@ def new_song():
         messagebox.askokcancel('Tolken', tolken_list[6])
         messagebox.askokcancel('Tolken', tolken_list[7])
         messagebox.askokcancel('Tolken', tolken_list[8])
-        messagebox.askokcancel('Tolken', tolken_list[9])
     elif index == 9:
         messagebox.showinfo('Lightning Round!', 'Det har blivit dags att spela Norsk kareoke!')
     elif index == 14:
         messagebox.showinfo('Lightning Round!', 'Det har blivit dags att spela Eläkeläiset!')
-        
-        
- 
+
 # Correct song button command
 def correct():
     if bt_1.cget('bg') == 'blue':
         tg_1()
-    if bt_2.cget('bg') == 'blue':    
+    if bt_2.cget('bg') == 'blue':
         tg_2()
     if bt_3.cget('bg') == 'blue':
         tg_3()
-    if bt_4.cget('bg') == 'blue':    
+    if bt_4.cget('bg') == 'blue':
         tg_4()
     if bt_5.cget('bg') == 'blue':
         tg_5()
@@ -153,6 +150,17 @@ for line in file:
     song = line.split(';')
     song_list.append(song)
 file.close()
+
+red_square = []
+for i in range(0,len(song_list)):
+    temp = [0, 0, 0, 0, 0]
+    first = random.randint(0,4)
+    second = random.randint(0,4)
+    while second == first:
+        second = random.randint(0,4)
+    temp[first] = 1
+    temp[second] = 1
+    red_square.append(temp)
 
 lbl_name = tk.Label(root, font = ('arial', 60, 'bold'), text = "Så Ska Det Låta!", fg = "black", bd = 10, bg = 'steel blue', anchor = 'w')
 lbl_name.place(x = w/2, y = 60, anchor = 'center')
